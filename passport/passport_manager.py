@@ -35,10 +35,10 @@ class PassportManager:
         spec_version = self._raw_yaml.get("spec_version", "")
         metadata = self._raw_yaml.get("metadata", {})
         
-        agent_id = self._raw_yaml.get("agent_id") or metadata.get("agent_id", "")
-        name = self._raw_yaml.get("name") or metadata.get("name", "")
-        class_name = self._raw_yaml.get("class_name") or metadata.get("class_name", "")
-        version = self._raw_yaml.get("version") or metadata.get("version", "")
+        name = self._raw_yaml.get("name") or metadata.get("name", "smart-traffic-management-agent")
+        agent_id = self._raw_yaml.get("agent_id") or metadata.get("agent_id") or f"{name}-v1"
+        class_name = self._raw_yaml.get("class_name") or metadata.get("class_name") or "".join(w.capitalize() for w in name.replace("-", "_").split("_"))
+        version = self._raw_yaml.get("version") or metadata.get("version", "1.0.0")
         description = self._raw_yaml.get("description") or metadata.get("description", "")
         author = self._raw_yaml.get("author") or metadata.get("author", "HiDevs x Lyzr Agent Passport Challenge")
         license_str = self._raw_yaml.get("license") or metadata.get("license", "MIT")

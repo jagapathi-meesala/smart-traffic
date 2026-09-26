@@ -1,17 +1,7 @@
 spec_version: "0.1.0"
 name: "smart-traffic-management-agent"
-agent_id: "smart-traffic-management-agent-v1"
-class_name: "SmartTrafficManagementAgent"
 version: "1.0.0"
 description: "Autonomous portable traffic management agent that profiles datasets, detects quality anomalies, analyzes congestion indicators, evaluates incidents, and generates evidence-based traffic management recommendations offline."
-author: "HiDevs x Lyzr Agent Passport Challenge"
-license: "MIT"
-tags:
-  - traffic-management
-  - congestion-analysis
-  - data-quality
-  - anomaly-detection
-  - analytical-reporting
 
 capabilities:
   - name: "traffic_data_profiling"
@@ -51,13 +41,3 @@ tools:
   - name: "traffic_report_tool"
     description: "Produces comprehensive analytical traffic management reports."
     capability: "traffic_analytical_reporting"
-
-contracts:
-  behavior_contract: "contracts.behavior_contract.BehaviorContract"
-  input_contract: "contracts.input_contract.InputContract"
-  output_contract: "contracts.output_contract.OutputContract"
-
-adapters:
-  portable_adapter: "adapters.portable_adapter.PortableAdapter"
-  framework_adapter: "adapters.framework_adapter.FrameworkAdapter"
-  openai_adapter: "adapters.openai_adapter.OpenAIAdapter"
