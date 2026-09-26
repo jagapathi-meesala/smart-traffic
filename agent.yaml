@@ -1,0 +1,64 @@
+spec_version: "0.1.0"
+metadata:
+  agent_id: "smart-traffic-management-agent-v1"
+  name: "smart-traffic-management-agent"
+  class_name: "SmartTrafficManagementAgent"
+  version: "1.0.0"
+  description: "Autonomous portable traffic management agent that profiles datasets, detects quality anomalies, analyzes congestion indicators, evaluates incidents, and generates evidence-based traffic management recommendations offline."
+  author: "HiDevs x Lyzr Agent Passport Challenge"
+  license: "MIT"
+  tags:
+    - traffic-management
+    - congestion-analysis
+    - data-quality
+    - anomaly-detection
+    - analytical-reporting
+
+capabilities:
+  - name: "traffic_data_profiling"
+    description: "Profiles structured traffic datasets for row counts, column types, missing values, duplicates, and numerical distributions."
+  - name: "congestion_analysis"
+    description: "Evaluates congestion metrics including speed, vehicle count, occupancy, travel time, delay, and density dynamically."
+  - name: "traffic_quality_analysis"
+    description: "Assesses traffic data hygiene, identifying invalid numeric bounds, inconsistent timestamps, and suspicious value distributions."
+  - name: "incident_analysis"
+    description: "Analyzes traffic incident patterns, severity metrics, and impacted observation records when incident fields are present."
+  - name: "traffic_anomaly_detection"
+    description: "Detects statistical traffic anomalies using configurable methods such as Z-score, IQR, and rolling metrics."
+  - name: "traffic_management_recommendation"
+    description: "Generates transparent, evidence-backed traffic mitigation strategies with detailed reasoning and confidence bounds."
+  - name: "traffic_analytical_reporting"
+    description: "Synthesizes data quality, congestion, incident, anomaly, and recommendation findings into structured reports."
+
+tools:
+  - name: "traffic_data_profiler_tool"
+    description: "Profiles raw traffic observation datasets."
+    capability: "traffic_data_profiling"
+  - name: "congestion_analyzer_tool"
+    description: "Analyzes dynamic traffic congestion metrics and indicators."
+    capability: "congestion_analysis"
+  - name: "traffic_quality_tool"
+    description: "Performs deep data quality and validation audits."
+    capability: "traffic_quality_analysis"
+  - name: "incident_analysis_tool"
+    description: "Analyzes incident occurrences, categories, and severity distribution."
+    capability: "incident_analysis"
+  - name: "traffic_anomaly_detector_tool"
+    description: "Identifies statistical traffic anomalies."
+    capability: "traffic_anomaly_detection"
+  - name: "traffic_management_recommender_tool"
+    description: "Derives actionable traffic mitigation recommendations from evidence."
+    capability: "traffic_management_recommendation"
+  - name: "traffic_report_tool"
+    description: "Produces comprehensive analytical traffic management reports."
+    capability: "traffic_analytical_reporting"
+
+contracts:
+  behavior_contract: "contracts.behavior_contract.BehaviorContract"
+  input_contract: "contracts.input_contract.InputContract"
+  output_contract: "contracts.output_contract.OutputContract"
+
+adapters:
+  portable_adapter: "adapters.portable_adapter.PortableAdapter"
+  framework_adapter: "adapters.framework_adapter.FrameworkAdapter"
+  openai_adapter: "adapters.openai_adapter.OpenAIAdapter"
