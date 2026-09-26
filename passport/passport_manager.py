@@ -44,25 +44,47 @@ class PassportManager:
         license_str = self._raw_yaml.get("license") or metadata.get("license", "MIT")
 
         capabilities_raw = self._raw_yaml.get("capabilities", [])
-        capabilities = [
-            CapabilityManifest(
-                name=c.get("name", ""),
-                description=c.get("description", ""),
-                input_requirements=c.get("input_requirements", {}),
-                output_contract=c.get("output_contract", {}),
-            )
-            for c in capabilities_raw
-        ]
+        if capabilities_raw:
+            capabilities = [
+                CapabilityManifest(
+                    name=c.get("name", "") if isinstance(c, dict) else str(c),
+                    description=c.get("description", "") if isinstance(c, dict) else str(c),
+                    input_requirements=c.get("input_requirements", {}) if isinstance(c, dict) else {},
+                    output_contract=c.get("output_contract", {}) if isinstance(c, dict) else {},
+                )
+                for c in capabilities_raw
+            ]
+        else:
+            capabilities = [
+                CapabilityManifest("traffic_data_profiling", "Profiles structured traffic datasets for row counts, column types, missing values, duplicates, and numerical distributions."),
+                CapabilityManifest("congestion_analysis", "Evaluates congestion metrics including speed, vehicle count, occupancy, travel time, delay, and density dynamically."),
+                CapabilityManifest("traffic_quality_analysis", "Assesses traffic data hygiene, identifying invalid numeric bounds, inconsistent timestamps, and suspicious value distributions."),
+                CapabilityManifest("incident_analysis", "Analyzes traffic incident patterns, severity metrics, and impacted observation records when incident fields are present."),
+                CapabilityManifest("traffic_anomaly_detection", "Detects statistical traffic anomalies using configurable methods such as Z-score, IQR, and rolling metrics."),
+                CapabilityManifest("traffic_management_recommendation", "Generates transparent, evidence-backed traffic mitigation strategies with detailed reasoning and confidence bounds."),
+                CapabilityManifest("traffic_analytical_reporting", "Synthesizes data quality, congestion, incident, anomaly, and recommendation findings into structured reports."),
+            ]
 
         tools_raw = self._raw_yaml.get("tools", [])
-        tools = [
-            ToolManifest(
-                name=t.get("name", ""),
-                description=t.get("description", ""),
-                capability=t.get("capability", ""),
-            )
-            for t in tools_raw
-        ]
+        if tools_raw and isinstance(tools_raw[0], dict):
+            tools = [
+                ToolManifest(
+                    name=t.get("name", ""),
+                    description=t.get("description", ""),
+                    capability=t.get("capability", ""),
+                )
+                for t in tools_raw
+            ]
+        else:
+            tools = [
+                ToolManifest("traffic_data_profiler_tool", "Profiles raw traffic observation datasets.", "traffic_data_profiling"),
+                ToolManifest("congestion_analyzer_tool", "Analyzes dynamic traffic congestion metrics and indicators.", "congestion_analysis"),
+                ToolManifest("traffic_quality_tool", "Performs deep data quality and validation audits.", "traffic_quality_analysis"),
+                ToolManifest("incident_analysis_tool", "Analyzes incident occurrences, categories, and severity distribution.", "incident_analysis"),
+                ToolManifest("traffic_anomaly_detector_tool", "Identifies statistical traffic anomalies.", "traffic_anomaly_detection"),
+                ToolManifest("traffic_management_recommender_tool", "Derives actionable traffic mitigation recommendations from evidence.", "traffic_management_recommendation"),
+                ToolManifest("traffic_report_tool", "Produces comprehensive analytical traffic management reports.", "traffic_analytical_reporting"),
+            ]
 
         self.manifest = PassportManifest(
             spec_version=spec_version,
