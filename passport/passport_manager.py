@@ -35,6 +35,14 @@ class PassportManager:
         spec_version = self._raw_yaml.get("spec_version", "")
         metadata = self._raw_yaml.get("metadata", {})
         
+        agent_id = self._raw_yaml.get("agent_id") or metadata.get("agent_id", "")
+        name = self._raw_yaml.get("name") or metadata.get("name", "")
+        class_name = self._raw_yaml.get("class_name") or metadata.get("class_name", "")
+        version = self._raw_yaml.get("version") or metadata.get("version", "")
+        description = self._raw_yaml.get("description") or metadata.get("description", "")
+        author = self._raw_yaml.get("author") or metadata.get("author", "HiDevs x Lyzr Agent Passport Challenge")
+        license_str = self._raw_yaml.get("license") or metadata.get("license", "MIT")
+
         capabilities_raw = self._raw_yaml.get("capabilities", [])
         capabilities = [
             CapabilityManifest(
@@ -58,13 +66,13 @@ class PassportManager:
 
         self.manifest = PassportManifest(
             spec_version=spec_version,
-            agent_id=metadata.get("agent_id", ""),
-            name=metadata.get("name", ""),
-            class_name=metadata.get("class_name", ""),
-            version=metadata.get("version", ""),
-            description=metadata.get("description", ""),
-            author=metadata.get("author", "HiDevs x Lyzr Agent Passport Challenge"),
-            license=metadata.get("license", "MIT"),
+            agent_id=agent_id,
+            name=name,
+            class_name=class_name,
+            version=version,
+            description=description,
+            author=author,
+            license=license_str,
             capabilities=capabilities,
             tools=tools,
             contracts=self._raw_yaml.get("contracts", {}),
